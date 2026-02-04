@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeMaster Pro - Master Stock Trading</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-chart-line"></i>
+                <span>TradeMaster Pro</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="btn-primary" onclick="showLogin()">Get Started</button>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-fire"></i>
+                    <span>#1 Trading Education Platform</span>
+                </div>
+                <h1>Master the Art of <span class="gradient-text">Stock Trading</span></h1>
+                <p>Learn from industry experts and transform your financial future with our comprehensive trading courses. From basics to advanced strategies.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary btn-large" onclick="scrollToCourses()">
+                        Explore Courses <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn-secondary btn-large" onclick="showVideo()">
+                        <i class="fas fa-play"></i> Watch Demo
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>50K+</h3>
+                        <p>Active Students</p>
+                    </div>
+                    <div class="stat">
+                        <h3>100+</h3>
+                        <p>Video Lessons</p>
+                    </div>
+                    <div class="stat">
+                        <h3>95%</h3>
+                        <p>Success Rate</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-card card-1">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Portfolio Up 24%</span>
+                </div>
+                <div class="floating-card card-2">
+                    <i class="fas fa-trophy"></i>
+                    <span>Top Trader</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1611974765270-ca1258634369?w=600&q=80" alt="Trading Dashboard">
+            </div>
+        </div>
+        <div class="hero-bg"></div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Courses</h2>
+                <p>Choose from our wide range of trading courses designed for every skill level</p>
+            </div>
+            <div class="courses-grid">
+                <!-- Course 1 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1611974765270-ca1258634369?w=400&q=80" alt="Stock Market">
+                        <span class="badge">Bestseller</span>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <span class="level"><i class="fas fa-signal"></i> Beginner</span>
+                            <span class="duration"><i class="fas fa-clock"></i> 12 Hours</span>
+                        </div>
+                        <h3>Stock Market Fundamentals</h3>
+                        <p>Learn the basics of stock market trading, technical analysis, and risk management.</p>
+                        <div class="course-footer">
+                            <div class="price">
+                                <span class="current">₹1,999</span>
+                                <span class="original">₹3,999</span>
+                            </div>
+                            <button class="btn-primary" onclick="enrollNow('Stock Market Fundamentals')">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=400&q=80" alt="Options Trading">
+                        <span class="badge hot">Hot</span>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <span class="level"><i class="fas fa-signal"></i> Advanced</span>
+                            <span class="duration"><i class="fas fa-clock"></i> 20 Hours</span>
+                        </div>
+                        <h3>Advanced Options Trading</h3>
+                        <p>Master options strategies including spreads, straddles, and hedging techniques.</p>
+                        <div class="course-footer">
+                            <div class="price">
+                                <span class="current">₹4,999</span>
+                                <span class="original">₹9,999</span>
+                            </div>
+                            <button class="btn-primary" onclick="enrollNow('Advanced Options Trading')">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&q=80" alt="Forex Trading">
+                        <span class="badge new">New</span>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <span class="level"><i class="fas fa-signal"></i> Intermediate</span>
+                            <span class="duration"><i class="fas fa-clock"></i> 15 Hours</span>
+                        </div>
+                        <h3>Forex Trading Mastery</h3>
+                        <p>Complete guide to currency trading with live market analysis.</p>
+                        <div class="course-footer">
+                            <div class="price">
+                                <span class="current">₹3,499</span>
+                                <span class="original">₹6,999</span>
+                            </div>
+                            <button class="btn-primary" onclick="enrollNow('Forex Trading Mastery')">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 4 -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&q=80" alt="Crypto Trading">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-meta">
+                            <span class="level"><i class="fas fa-signal"></i> Beginner</span>
+                            <span class="duration"><i class="fas fa-clock"></i> 10 Hours</span>
+                        </div>
+                        <h3>Crypto Trading Pro</h3>
+                        <p>Learn cryptocurrency trading with blockchain fundamentals.</p>
+                        <div class="course-footer">
+                            <div class="price">
+                                <span class="current">₹2,999</span>
+                                <span class="original">₹5,999</span>
+                            </div>
+                            <button class="btn-primary" onclick="enrollNow('Crypto Trading Pro')">Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Us</h2>
+                <p>We provide the best learning experience for aspiring traders</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>HD Video Lessons</h3>
+                    <p>High-quality video content with crystal clear explanations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Certified Courses</h3>
+                    <p>Get certified upon completion and boost your career</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Expert Mentors</h3>
+                    <p>Learn from industry experts with 10+ years experience</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Lifetime Access</h3>
+                    <p>Access courses anytime, anywhere on any device</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Round the clock support to help you with queries</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>Money Back Guarantee</h3>
+                    <p>7-day money-back guarantee if not satisfied</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Start Your Trading Journey?</h2>
+                <p>Join 50,000+ students already learning on TradeMaster Pro</p>
+                <button class="btn-white btn-large" onclick="showLogin()">Get Started Today <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Have questions? Get in touch with us</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>support@trademasterpro.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Mumbai, Maharashtra, India</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="4" required></textarea>
+                    <button type="submit" class="btn-primary btn-full">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="nav-brand">
+                        <i class="fas fa-chart-line"></i>
+                        <span>TradeMaster Pro</span>
+                    </div>
+                    <p>Empowering traders with world-class education and tools for financial success.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TradeMaster Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLogin()">&times;</span>
+            <h2>Welcome Back</h2>
+            <p>Login to access your courses</p>
+            <form onsubmit="handleLogin(event)">
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit" class="btn-primary btn-full">Login</button>
+            </form>
+            <p class="form-footer">Don't have an account? <a href="#" onclick="showSignup()">Sign up</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
