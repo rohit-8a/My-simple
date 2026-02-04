@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - TradeMaster Pro</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <h2>Admin Panel</h2>
+            </div>
+            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="adminUser" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="adminPass" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <p class="hint">Default: admin / admin123</p>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard" class="dashboard hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-chart-line"></i>
+                <span>TradeMaster</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active" onclick="showSection('courses')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Courses</span>
+                </a>
+                <a href="#" onclick="showSection('videos')">
+                    <i class="fas fa-video"></i>
+                    <span>Videos</span>
+                </a>
+                <a href="#" onclick="showSection('payments')">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Payments</span>
+                </a>
+                <a href="#" onclick="showSection('students')">
+                    <i class="fas fa-users"></i>
+                    <span>Students</span>
+                </a>
+                <a href="#" onclick="showSection('settings')">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button onclick="logout()" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1 id="pageTitle">Manage Courses</h1>
+                <div class="header-actions">
+                    <button class="btn-secondary" onclick="viewWebsite()">
+                        <i class="fas fa-eye"></i> View Website
+                    </button>
+                    <div class="user-info">
+                        <span>Welcome, Admin</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Courses Section -->
+            <section id="coursesSection" class="content-section">
+                <div class="section-header">
+                    <button class="btn-primary" onclick="openCourseModal()">
+                        <i class="fas fa-plus"></i> Add New Course
+                    </button>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div>
+                            <h3 id="totalCourses">0</h3>
+                            <p>Total Courses</p>
+                        </div>
+                    </div>
+                    <div class="stat-card blue">
+                        <i class="fas fa-video"></i>
+                        <div>
+                            <h3 id="totalVideos">0</h3>
+                            <p>Total Videos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card green">
+                        <i class="fas fa-rupee-sign"></i>
+                        <div>
+                            <h3 id="totalRevenue">₹0</h3>
+                            <p>Total Revenue</p>
+                        </div>
+                    </div>
+                    <div class="stat-card purple">
+                        <i class="fas fa-users"></i>
+                        <div>
+                            <h3 id="totalStudents">0</h3>
+                            <p>Total Students</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table" id="coursesTable">
+                        <thead>
+                            <tr>
+                                <th>Course</th>
+                                <th>Price</th>
+                                <th>Videos</th>
+                                <th>Students</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="coursesTableBody">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Videos Section -->
+            <section id="videosSection" class="content-section hidden">
+                <div class="section-header">
+                    <select id="courseSelect" class="form-select" onchange="loadVideos()">
+                        <option value="">Select Course</option>
+                    </select>
+                    <button class="btn-primary" onclick="openVideoModal()">
+                        <i class="fas fa-plus"></i> Add Video
+                    </button>
+                </div>
+                <div class="videos-grid" id="videosGrid">
+                    <!-- Dynamic Videos -->
+                </div>
+            </section>
+
+            <!-- Payments Section -->
+            <section id="paymentsSection" class="content-section hidden">
+                <div class="section-header">
+                    <h2>Payment Methods & Settings</h2>
+                </div>
+                
+                <div class="settings-card">
+                    <h3><i class="fas fa-qrcode"></i> UPI Payment</h3>
+                    <div class="form-group">
+                        <label>UPI ID</label>
+                        <input type="text" id="upiId" class="form-control" placeholder="yourname@upi">
+                    </div>
+                    <div class="form-group">
+                        <label>Merchant Name</label>
+                        <input type="text" id="merchantName" class="form-control" placeholder="Your Business Name">
+                    </div>
+                    <button class="btn-primary" onclick="saveUpiSettings()">Save UPI Settings</button>
+                </div>
+
+                <div class="settings-card">
+                    <h3><i class="fas fa-bank"></i> Bank Transfer</h3>
+                    <div class="form-group">
+                        <label>Account Number</label>
+                        <input type="text" id="accountNumber" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>IFSC Code</label>
+                        <input type="text" id="ifscCode" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Account Holder Name</label>
+                        <input type="text" id="accountHolder" class="form-control">
+                    </div>
+                    <button class="btn-primary" onclick="saveBankSettings()">Save Bank Details</button>
+                </div>
+
+                <div class="table-container">
+                    <h3>Recent Transactions</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Student</th>
+                                <th>Course</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsTableBody">
+                            <!-- Dynamic -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Students Section -->
+            <section id="studentsSection" class="content-section hidden">
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Enrolled Courses</th>
+                                <th>Join Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <!-- Dynamic -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settingsSection" class="content-section hidden">
+                <div class="settings-card">
+                    <h3>Website Settings</h3>
+                    <div class="form-group">
+                        <label>Website Title</label>
+                        <input type="text" id="siteTitle" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Email</label>
+                        <input type="email" id="contactEmail" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Phone</label>
+                        <input type="tel" id="contactPhone" class="form-control">
+                    </div>
+                    <button class="btn-primary" onclick="saveSiteSettings()">Save Changes</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add/Edit Course Modal -->
+    <div id="courseModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 id="courseModalTitle">Add New Course</h2>
+                <button class="close-btn" onclick="closeCourseModal()">&times;</button>
+            </div>
+            <form id="courseForm" onsubmit="saveCourse(event)">
+                <input type="hidden" id="courseId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Course Title</label>
+                        <input type="text" id="courseTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="courseCategory" class="form-control">
+                            <option value="Stock Market">Stock Market</option>
+                            <option value="Options">Options Trading</option>
+                            <option value="Forex">Forex</option>
+                            <option value="Crypto">Cryptocurrency</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="courseDesc" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Current Price (₹)</label>
+                        <input type="number" id="coursePrice" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Original Price (₹)</label>
+                        <input type="number" id="courseOriginalPrice" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <input type="text" id="courseDuration" class="form-control" placeholder="e.g., 12 Hours">
+                    </div>
+                    <div class="form-group">
+                        <label>Level</label>
+                        <select id="courseLevel" class="form-control">
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Thumbnail URL</label>
+                    <input type="url" id="courseThumbnail" class="form-control" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label>Course Password (for enrollment)</label>
+                    <input type="text" id="coursePassword" class="form-control" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeCourseModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Course</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Video</h2>
+                <button class="close-btn" onclick="closeVideoModal()">&times;</button>
+            </div>
+            <form id="videoForm" onsubmit="saveVideo(event)">
+                <div class="form-group">
+                    <label>Video Title</label>
+                    <input type="text" id="videoTitle" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Video URL (YouTube Embed or Direct Link)</label>
+                    <input type="url" id="videoUrl" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="videoDesc" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Duration</label>
+                    <input type="text" id="videoDuration" class="form-control" placeholder="e.g., 15:30">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeVideoModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Video</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
